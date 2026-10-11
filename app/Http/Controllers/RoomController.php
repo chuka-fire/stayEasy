@@ -77,6 +77,11 @@ class RoomController extends Controller
 
         abort_unless($room, 404);
 
+        if ($room->bookings()->exists()) {
+            return redirect()->route('rooms.show', $room->id)
+                ->with('warning', 'This room has bookings and cannot be deleted.');
+        }
+
         $room->delete();
 
         return redirect()->route('rooms.index')
