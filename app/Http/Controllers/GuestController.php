@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class GuestController extends Controller
@@ -19,5 +21,21 @@ class GuestController extends Controller
         $guest = Guest::find($id);
 
         return view('guests.show', compact('guest'));
+    }
+
+    public function create(): View
+    {
+        return view('guests.create');
+    }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $guest = Guest::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+        ]);
+
+        return redirect()->route('guests.show', $guest->id);
     }
 }
