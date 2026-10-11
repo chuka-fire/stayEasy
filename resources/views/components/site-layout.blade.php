@@ -22,6 +22,8 @@
     <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8">
         <h1 class="text-2xl font-bold mb-6">{{ $title }}</h1>
 
+        <x-message-block />
+
         {{ $slot }}
     </main>
 

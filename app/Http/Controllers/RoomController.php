@@ -30,13 +30,16 @@ class RoomController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $room = Room::create([
-            'number' => $request->number,
-            'type' => $request->type,
-            'price_per_night' => $request->price_per_night,
+        $validated = $request->validate([
+            'number' => 'required|unique:rooms,number',
+            'type' => 'required|in:single,double,suite',
+            'price_per_night' => 'required|numeric|gt:0',
         ]);
 
-        return redirect()->route('rooms.show', $room->id);
+        $room = Room::create($validated);
+
+        return redirect()->route('rooms.show', $room->id)
+            ->with('message', 'Room saved.');
     }
 
     public function edit($id): View
@@ -50,19 +53,23 @@ class RoomController extends Controller
     {
         $room = Room::find($id);
 
-        $room->update([
-            'number' => $request->number,
-            'type' => $request->type,
-            'price_per_night' => $request->price_per_night,
+        $validated = $request->validate([
+            'number' => 'required|unique:rooms,number,'.$id,
+            'type' => 'required|in:single,double,suite',
+            'price_per_night' => 'required|numeric|gt:0',
         ]);
 
-        return redirect()->route('rooms.show', $room->id);
+        $room->update($validated);
+
+        return redirect()->route('rooms.show', $room->id)
+            ->with('message', 'Room updated.');
     }
 
     public function destroy($id): RedirectResponse
     {
         Room::find($id)->delete();
 
-        return redirect()->route('rooms.index');
+        return redirect()->route('rooms.index')
+            ->with('message', 'Room deleted.');
     }
 }

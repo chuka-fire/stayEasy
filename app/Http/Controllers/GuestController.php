@@ -30,12 +30,15 @@ class GuestController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $guest = Guest::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
         ]);
 
-        return redirect()->route('guests.show', $guest->id);
+        $guest = Guest::create($validated);
+
+        return redirect()->route('guests.show', $guest->id)
+            ->with('message', 'Guest saved.');
     }
 }
