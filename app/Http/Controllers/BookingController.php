@@ -71,4 +71,22 @@ class BookingController extends Controller
         return redirect()->route('bookings.show', $booking->id)
             ->with('message', 'Booking saved.');
     }
+
+    public function updateStatus(Request $request, $id): RedirectResponse
+    {
+        $validated = $request->validate([
+            'status' => 'required|in:booked,checked_in,checked_out,cancelled',
+        ]);
+
+        if ($validated['status'] === 'cancelled' && ! auth()->user()->isManager()) {
+            abort(403);
+        }
+
+        $booking = Booking::find($id);
+
+        $booking->update(['status' => $validated['status']]);
+
+        return redirect()->route('bookings.show', $booking->id)
+            ->with('message', 'Booking updated.');
+    }
 }

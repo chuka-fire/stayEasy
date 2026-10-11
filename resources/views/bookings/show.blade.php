@@ -32,5 +32,43 @@
         </dl>
     </div>
 
+    <div class="flex items-center gap-3 mb-6">
+        @if ($booking->status === 'booked')
+            <form method="POST" action="{{ route('bookings.status', $booking->id) }}">
+                @csrf
+                @method('PATCH')
+                <input type="hidden" name="status" value="checked_in">
+
+                <button type="submit" class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700">
+                    Check in
+                </button>
+            </form>
+        @endif
+
+        @if ($booking->status === 'checked_in')
+            <form method="POST" action="{{ route('bookings.status', $booking->id) }}">
+                @csrf
+                @method('PATCH')
+                <input type="hidden" name="status" value="checked_out">
+
+                <button type="submit" class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700">
+                    Check out
+                </button>
+            </form>
+        @endif
+
+        @if (auth()->user()->isManager() && $booking->status !== 'cancelled' && $booking->status !== 'checked_out')
+            <form method="POST" action="{{ route('bookings.status', $booking->id) }}">
+                @csrf
+                @method('PATCH')
+                <input type="hidden" name="status" value="cancelled">
+
+                <button type="submit" class="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-600">
+                    Cancel booking
+                </button>
+            </form>
+        @endif
+    </div>
+
     <a href="{{ route('bookings.index') }}" class="text-sm hover:underline">Back to bookings</a>
 </x-site-layout>

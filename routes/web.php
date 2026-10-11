@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/bookings/create', [BookingController::class, 'create'])->name('bookings.create');
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
     Route::get('/bookings/{id}', [BookingController::class, 'show'])->name('bookings.show');
+    Route::patch('/bookings/{id}/status', [BookingController::class, 'updateStatus'])->name('bookings.status');
 });
 
 require __DIR__.'/auth.php';

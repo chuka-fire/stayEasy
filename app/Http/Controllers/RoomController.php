@@ -25,11 +25,15 @@ class RoomController extends Controller
 
     public function create(): View
     {
+        abort_unless(auth()->user()->isManager(), 403);
+
         return view('rooms.create');
     }
 
     public function store(Request $request): RedirectResponse
     {
+        abort_unless(auth()->user()->isManager(), 403);
+
         $validated = $request->validate([
             'number' => 'required|unique:rooms,number',
             'type' => 'required|in:single,double,suite',
@@ -44,6 +48,8 @@ class RoomController extends Controller
 
     public function edit($id): View
     {
+        abort_unless(auth()->user()->isManager(), 403);
+
         $room = Room::find($id);
 
         return view('rooms.edit', compact('room'));
@@ -51,6 +57,8 @@ class RoomController extends Controller
 
     public function update(Request $request, $id): RedirectResponse
     {
+        abort_unless(auth()->user()->isManager(), 403);
+
         $room = Room::find($id);
 
         $validated = $request->validate([
@@ -67,6 +75,8 @@ class RoomController extends Controller
 
     public function destroy($id): RedirectResponse
     {
+        abort_unless(auth()->user()->isManager(), 403);
+
         Room::find($id)->delete();
 
         return redirect()->route('rooms.index')

@@ -12,21 +12,23 @@
         </dl>
     </div>
 
-    <div class="flex items-center gap-3 mb-6">
-        <a href="{{ route('rooms.edit', $room->id) }}"
-           class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700">
-            Edit room
-        </a>
+    @if (auth()->user()->isManager())
+        <div class="flex items-center gap-3 mb-6">
+            <a href="{{ route('rooms.edit', $room->id) }}"
+               class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700">
+                Edit room
+            </a>
 
-        <form method="POST" action="{{ route('rooms.destroy', $room->id) }}">
-            @csrf
-            @method('DELETE')
+            <form method="POST" action="{{ route('rooms.destroy', $room->id) }}">
+                @csrf
+                @method('DELETE')
 
-            <button type="submit" class="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-600">
-                Delete room
-            </button>
-        </form>
-    </div>
+                <button type="submit" class="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-600">
+                    Delete room
+                </button>
+            </form>
+        </div>
+    @endif
 
     <a href="{{ route('rooms.index') }}" class="text-sm hover:underline">Back to rooms</a>
 </x-site-layout>

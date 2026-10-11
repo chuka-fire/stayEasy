@@ -1,10 +1,12 @@
 <x-site-layout title="Rooms">
-    <div class="mb-4">
-        <a href="{{ route('rooms.create') }}"
-           class="inline-block bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700">
-            New room
-        </a>
-    </div>
+    @if (auth()->user()->isManager())
+        <div class="mb-4">
+            <a href="{{ route('rooms.create') }}"
+               class="inline-block bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700">
+                New room
+            </a>
+        </div>
+    @endif
 
     <div class="bg-white rounded shadow overflow-hidden">
         <table class="w-full text-left">
