@@ -7,6 +7,7 @@
 .phpunit.result.cache
 /.claude/settings.local.json
 /.codex
+/plan.md
 /.cursor/
 /.idea
 /.nova
