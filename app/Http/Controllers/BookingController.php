@@ -41,7 +41,7 @@ class BookingController extends Controller
         $validated = $request->validate([
             'room_id' => 'required|exists:rooms,id',
             'guest_id' => 'required|exists:guests,id',
-            'check_in' => 'required|date',
+            'check_in' => 'required|date|after_or_equal:today',
             'check_out' => 'required|date|after:check_in',
         ]);
 
