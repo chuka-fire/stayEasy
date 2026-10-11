@@ -23,6 +23,8 @@ class BookingController extends Controller
     {
         $booking = Booking::find($id);
 
+        abort_unless($booking, 404);
+
         return view('bookings.show', compact('booking'));
     }
 
@@ -83,6 +85,8 @@ class BookingController extends Controller
         }
 
         $booking = Booking::find($id);
+
+        abort_unless($booking, 404);
 
         $booking->update(['status' => $validated['status']]);
 

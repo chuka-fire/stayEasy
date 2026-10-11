@@ -20,6 +20,8 @@ class RoomController extends Controller
     {
         $room = Room::find($id);
 
+        abort_unless($room, 404);
+
         return view('rooms.show', compact('room'));
     }
 
@@ -52,6 +54,8 @@ class RoomController extends Controller
 
         $room = Room::find($id);
 
+        abort_unless($room, 404);
+
         return view('rooms.edit', compact('room'));
     }
 
@@ -60,6 +64,8 @@ class RoomController extends Controller
         abort_unless(auth()->user()->isManager(), 403);
 
         $room = Room::find($id);
+
+        abort_unless($room, 404);
 
         $validated = $request->validate([
             'number' => 'required|unique:rooms,number,'.$id,
@@ -77,7 +83,11 @@ class RoomController extends Controller
     {
         abort_unless(auth()->user()->isManager(), 403);
 
-        Room::find($id)->delete();
+        $room = Room::find($id);
+
+        abort_unless($room, 404);
+
+        $room->delete();
 
         return redirect()->route('rooms.index')
             ->with('message', 'Room deleted.');

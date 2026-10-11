@@ -20,6 +20,8 @@ class GuestController extends Controller
     {
         $guest = Guest::find($id);
 
+        abort_unless($guest, 404);
+
         return view('guests.show', compact('guest'));
     }
 

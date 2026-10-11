@@ -102,18 +102,18 @@ Internal hotel management tool for the staff of one hotel. Staff log in; manager
 
 ## Phase 5 — What a user can do: bookings and business logic
 
-- [ ] **5.1 Role helpers** — `isStaff()` and `isManager()` on User. 💾 `FEATURE :sparkles: Add role helper methods to User`
-- [ ] **5.2 Create a booking** — pick room, guest and dates; `user_id` comes from the logged-in user. Validate that rooms and guests exist and check-out is after check-in. 💾 `FEATURE :sparkles: Add the create new booking functionality`
-- [ ] **5.3 Calculate the total price** — nights × the room's price per night, in the controller. 💾 `FEATURE :sparkles: Calculate booking total price`
-- [ ] **5.4 Prevent double-booking** — reject dates that overlap another non-cancelled booking of the same room, with an error on the form. 💾 `FEATURE :sparkles: Prevent double-booking a room`
-- [ ] **5.5 Check in / check out** — status buttons on booking show, using a validated status value. 💾 `FEATURE :sparkles: Allow checking guests in and out`
-- [ ] **5.6 Managers only can cancel** — the controller refuses `cancelled` for non-managers (403), and the cancel button shows for managers only. 💾 `FEATURE :sparkles: Business logic - only managers can cancel bookings`
-- [ ] **5.7 Managers only manage rooms** — create, edit and delete return 403 for staff, and their buttons are hidden. 💾 `FEATURE :sparkles: Business logic - only managers manage rooms`
-- [ ] **5.8 Staff accounts: list and add** — manager-only UserController index, create and store, setting both flags. 💾 `FEATURE :sparkles: Managers can list and add staff`
-- [ ] **5.9 Staff accounts: edit and remove** — manager-only edit, update and destroy. 💾 `FEATURE :sparkles: Managers can edit and remove staff`
-- [ ] **5.10 Staff link for managers only** in the header. 💾 `DESIGN :art: Show staff link to managers only`
-- [ ] **5.11 Dashboard content** — today's check-ins and check-outs. 💾 `FEATURE :sparkles: Show today's check-ins and check-outs on dashboard`
-- [ ] **5.12 (Optional — decide first) Block deactivated staff** — small middleware that turns away users with `is_staff` false. Skip it to keep the flag as stored data only. 💾 `FEATURE :sparkles: Block deactivated staff accounts`
+- [x] **5.1 Role helpers** — `isStaff()` and `isManager()` on User. 💾 `FEATURE :sparkles: Add role helper methods to User`
+- [x] **5.2 Create a booking** — pick room, guest and dates; `user_id` comes from the logged-in user. Validate that rooms and guests exist and check-out is after check-in. 💾 `FEATURE :sparkles: Add the create new booking functionality`
+- [x] **5.3 Calculate the total price** — nights × the room's price per night, in the controller. 💾 `FEATURE :sparkles: Calculate booking total price`
+- [x] **5.4 Prevent double-booking** — reject dates that overlap another non-cancelled booking of the same room, with an error on the form. 💾 `FEATURE :sparkles: Prevent double-booking a room`
+- [x] **5.5 Check in / check out** — status buttons on booking show, using a validated status value. 💾 `FEATURE :sparkles: Allow checking guests in and out`
+- [x] **5.6 Managers only can cancel** — the controller refuses `cancelled` for non-managers (403), and the cancel button shows for managers only. 💾 `FEATURE :sparkles: Business logic - only managers can cancel bookings`
+- [x] **5.7 Managers only manage rooms** — create, edit and delete return 403 for staff, and their buttons are hidden. 💾 `FEATURE :sparkles: Business logic - only managers manage rooms`
+- [x] **5.8 Staff accounts: list and add** — manager-only UserController index, create and store, setting both flags. 💾 `FEATURE :sparkles: Managers can list and add staff`
+- [x] **5.9 Staff accounts: edit and remove** — manager-only edit, update and destroy. 💾 `FEATURE :sparkles: Managers can edit and remove staff`
+- [x] **5.10 Staff link for managers only** in the header. 💾 `DESIGN :art: Show staff link to managers only`
+- [x] **5.11 Dashboard content** — today's check-ins and check-outs. 💾 `FEATURE :sparkles: Show today's check-ins and check-outs on dashboard`
+- [x] **5.12 (Optional — decide first) Block deactivated staff** — small middleware that turns away users with `is_staff` false. Skip it to keep the flag as stored data only. 💾 `FEATURE :sparkles: Block deactivated staff accounts`
 - [ ] **5.13 🧑 Test both roles** — as admin (manager) and as a seeded staff user: try a double booking, cancel as staff, and open manager URLs directly as staff.
   ✅ VERIFY: overlap rejected, price correct, staff get 403 and see no manager buttons.
 - [ ] **5.14 🎓 DEFENSE** — explain the double-booking check, the price calculation, and where each permission is enforced (route, controller, view).

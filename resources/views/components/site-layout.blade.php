@@ -18,6 +18,10 @@
                     <a href="{{ route('guests.index') }}" class="hover:underline">Guests</a>
                     <a href="{{ route('bookings.index') }}" class="hover:underline">Bookings</a>
 
+                    @if (auth()->user()->isManager())
+                        <a href="{{ route('users.index') }}" class="hover:underline">Staff</a>
+                    @endif
+
                     <span class="text-gray-500">{{ auth()->user()->name }}</span>
 
                     <form method="POST" action="{{ route('logout') }}">
