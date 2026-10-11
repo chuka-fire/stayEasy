@@ -11,8 +11,6 @@ class UserController extends Controller
 {
     public function index(): View
     {
-        abort_unless(auth()->user()->isManager(), 403);
-
         $users = User::all();
 
         return view('users.index', compact('users'));
@@ -20,15 +18,11 @@ class UserController extends Controller
 
     public function create(): View
     {
-        abort_unless(auth()->user()->isManager(), 403);
-
         return view('users.create');
     }
 
     public function store(Request $request): RedirectResponse
     {
-        abort_unless(auth()->user()->isManager(), 403);
-
         $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -49,8 +43,6 @@ class UserController extends Controller
 
     public function edit($id): View
     {
-        abort_unless(auth()->user()->isManager(), 403);
-
         $user = User::find($id);
 
         abort_unless($user, 404);
@@ -60,8 +52,6 @@ class UserController extends Controller
 
     public function update(Request $request, $id): RedirectResponse
     {
-        abort_unless(auth()->user()->isManager(), 403);
-
         $user = User::find($id);
 
         abort_unless($user, 404);
@@ -79,7 +69,7 @@ class UserController extends Controller
             'is_manager' => $request->has('is_manager'),
         ]);
 
-        if ($validated['password']) {
+        if ($request->filled('password')) {
             $user->update(['password' => $validated['password']]);
         }
 
@@ -89,20 +79,18 @@ class UserController extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        abort_unless(auth()->user()->isManager(), 403);
-
         $user = User::find($id);
 
         abort_unless($user, 404);
 
         if ($user->id === auth()->id()) {
             return redirect()->route('users.index')
-                ->with('message', 'You cannot remove your own account.');
+                ->with('warning', 'You cannot remove your own account.');
         }
 
         if ($user->bookings()->exists()) {
             return redirect()->route('users.index')
-                ->with('message', $user->name.' has bookings and cannot be removed.');
+                ->with('warning', $user->name.' has bookings and cannot be removed.');
         }
 
         $user->delete();

@@ -18,7 +18,7 @@ class GuestController extends Controller
 
     public function show($id): View
     {
-        $guest = Guest::find($id);
+        $guest = Guest::with('bookings.room')->find($id);
 
         abort_unless($guest, 404);
 

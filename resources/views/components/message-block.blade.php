@@ -3,3 +3,9 @@
         {{ session('message') }}
     </div>
 @endif
+
+@if (session('warning'))
+    <div class="bg-amber-100 border border-amber-300 text-amber-900 rounded px-4 py-3 mb-6">
+        {{ session('warning') }}
+    </div>
+@endif

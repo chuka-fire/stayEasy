@@ -88,6 +88,18 @@ class BookingController extends Controller
 
         abort_unless($booking, 404);
 
+        $nextStatuses = [
+            'booked' => ['checked_in', 'cancelled'],
+            'checked_in' => ['checked_out', 'cancelled'],
+            'checked_out' => [],
+            'cancelled' => [],
+        ];
+
+        if (! in_array($validated['status'], $nextStatuses[$booking->status])) {
+            return redirect()->route('bookings.show', $booking->id)
+                ->with('warning', 'That status change is not allowed.');
+        }
+
         $booking->update(['status' => $validated['status']]);
 
         return redirect()->route('bookings.show', $booking->id)

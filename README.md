@@ -1,58 +1,90 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# StayEasy
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+An internal hotel management tool for the staff of a single hotel. Staff log in to
+manage guests and bookings at the front desk; managers get extra powers on top.
 
-## About Laravel
+Guests never log in. Their records are created by staff at the desk, which is why
+`Guest` is a separate model from `User` rather than another kind of user.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## What a user can do
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+A **staff member** can:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- See the dashboard with today's arrivals and departures
+- See the list of rooms and the details of any room
+- See the list of guests, add a new guest, and see a guest's booking history
+- See the list of bookings and the details of any booking
+- Create a booking for a room and a guest over a range of dates
+- Check a guest in, and check them out again
 
-## Learning Laravel
+A **manager** can do everything a staff member can, and also:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Add, edit and delete rooms
+- Cancel a booking
+- See the list of staff accounts, and create, edit or remove them
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+A user whose account has been marked inactive cannot use the app at all, even
+with the right password. This is how a former employee is turned off without
+deleting their record, which would also take their bookings with it.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Business rules
 
-## Agentic Development
+- **A room cannot be double-booked.** A new booking is refused if its dates
+  overlap an existing, non-cancelled booking of the same room. Same-day
+  turnover is fine: one guest can check out and another check in on the same day.
+- **The total price is calculated by the app**, never typed in. It is the number
+  of nights multiplied by the room's price per night, worked out in the controller
+  when the booking is created.
+- **A booking moves through its statuses in order**: booked, then checked in,
+  then checked out. Only a manager can cancel, and only before checkout.
+- **A staff member who has created bookings cannot be removed**, since their
+  bookings record who took them.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Running it
+
+Requires PHP 8.4+ and Composer. The database is SQLite, so there is nothing to
+configure.
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer install
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+```bash
+cp .env.example .env
+```
 
-## Contributing
+```bash
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+php artisan migrate:fresh --seed
+```
 
-## Code of Conduct
+```bash
+php artisan serve
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+The seeder creates a manager account, five staff accounts, ten rooms, ten guests
+and fifteen bookings.
 
-## Security Vulnerabilities
+**Log in as the manager:** `admin@admin.com` with the password `password`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Seeded staff accounts also use `password`; their email addresses are visible on
+the Staff page once you are logged in as the manager.
 
-## License
+## Running the tests
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan test
+```
+
+## How it is built
+
+- **Models:** `User`, `Room`, `Guest`, `Booking`
+- **Relations:** three one-to-many — a booking belongs to the staff member who
+  created it, to a room, and to a guest
+- **Roles:** two booleans on `User` (`is_staff`, `is_manager`); there is no Role model
+- **Permissions:** `auth` and `staff` middleware on the routes, `isManager()`
+  checked in controllers to return 403, and checked again in views to hide
+  buttons the user cannot use

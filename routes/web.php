@@ -14,12 +14,12 @@ Route::middleware(['auth', 'staff'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
-    Route::get('/rooms/create', [RoomController::class, 'create'])->name('rooms.create');
-    Route::post('/rooms', [RoomController::class, 'store'])->name('rooms.store');
+    Route::get('/rooms/create', [RoomController::class, 'create'])->middleware('manager')->name('rooms.create');
+    Route::post('/rooms', [RoomController::class, 'store'])->middleware('manager')->name('rooms.store');
     Route::get('/rooms/{id}', [RoomController::class, 'show'])->name('rooms.show');
-    Route::get('/rooms/{id}/edit', [RoomController::class, 'edit'])->name('rooms.edit');
-    Route::put('/rooms/{id}', [RoomController::class, 'update'])->name('rooms.update');
-    Route::delete('/rooms/{id}', [RoomController::class, 'destroy'])->name('rooms.destroy');
+    Route::get('/rooms/{id}/edit', [RoomController::class, 'edit'])->middleware('manager')->name('rooms.edit');
+    Route::put('/rooms/{id}', [RoomController::class, 'update'])->middleware('manager')->name('rooms.update');
+    Route::delete('/rooms/{id}', [RoomController::class, 'destroy'])->middleware('manager')->name('rooms.destroy');
 
     Route::get('/guests', [GuestController::class, 'index'])->name('guests.index');
     Route::get('/guests/create', [GuestController::class, 'create'])->name('guests.create');
@@ -32,12 +32,12 @@ Route::middleware(['auth', 'staff'])->group(function () {
     Route::get('/bookings/{id}', [BookingController::class, 'show'])->name('bookings.show');
     Route::patch('/bookings/{id}/status', [BookingController::class, 'updateStatus'])->name('bookings.status');
 
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-    Route::post('/users', [UserController::class, 'store'])->name('users.store');
-    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
-    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::get('/users', [UserController::class, 'index'])->middleware('manager')->name('users.index');
+    Route::get('/users/create', [UserController::class, 'create'])->middleware('manager')->name('users.create');
+    Route::post('/users', [UserController::class, 'store'])->middleware('manager')->name('users.store');
+    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->middleware('manager')->name('users.edit');
+    Route::put('/users/{id}', [UserController::class, 'update'])->middleware('manager')->name('users.update');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->middleware('manager')->name('users.destroy');
 });
 
 require __DIR__.'/auth.php';
