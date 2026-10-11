@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Guest;
+use App\Models\Room;
+use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class BookingController extends Controller
@@ -19,5 +24,51 @@ class BookingController extends Controller
         $booking = Booking::find($id);
 
         return view('bookings.show', compact('booking'));
+    }
+
+    public function create(): View
+    {
+        $rooms = Room::all();
+        $guests = Guest::all();
+
+        return view('bookings.create', compact('rooms', 'guests'));
+    }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'room_id' => 'required|exists:rooms,id',
+            'guest_id' => 'required|exists:guests,id',
+            'check_in' => 'required|date',
+            'check_out' => 'required|date|after:check_in',
+        ]);
+
+        $isTaken = Booking::where('room_id', $validated['room_id'])
+            ->where('status', '!=', 'cancelled')
+            ->whereDate('check_in', '<', $validated['check_out'])
+            ->whereDate('check_out', '>', $validated['check_in'])
+            ->exists();
+
+        if ($isTaken) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['room_id' => 'This room is already booked for those dates.']);
+        }
+
+        $room = Room::find($validated['room_id']);
+        $nights = Carbon::parse($validated['check_in'])->diffInDays($validated['check_out']);
+
+        $booking = Booking::create([
+            'user_id' => auth()->id(),
+            'room_id' => $validated['room_id'],
+            'guest_id' => $validated['guest_id'],
+            'check_in' => $validated['check_in'],
+            'check_out' => $validated['check_out'],
+            'total_price' => $nights * $room->price_per_night,
+            'status' => 'booked',
+        ]);
+
+        return redirect()->route('bookings.show', $booking->id)
+            ->with('message', 'Booking saved.');
     }
 }

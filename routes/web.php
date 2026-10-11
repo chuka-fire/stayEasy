@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/guests/{id}', [GuestController::class, 'show'])->name('guests.show');
 
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+    Route::get('/bookings/create', [BookingController::class, 'create'])->name('bookings.create');
+    Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
     Route::get('/bookings/{id}', [BookingController::class, 'show'])->name('bookings.show');
 });
 

@@ -37,4 +37,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Booking::class, 'user_id');
     }
+
+    public function isStaff(): bool
+    {
+        return $this->is_staff;
+    }
+
+    public function isManager(): bool
+    {
+        return $this->is_manager;
+    }
 }

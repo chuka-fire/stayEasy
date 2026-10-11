@@ -17,7 +17,7 @@ class BookingFactory extends Factory
      */
     public function definition(): array
     {
-        $checkIn = fake()->dateTimeBetween('-1 month', '+1 month');
+        $checkIn = fake()->dateTimeBetween('-1 month', '+1 month')->setTime(0, 0);
         $checkOut = (clone $checkIn)->modify('+' . fake()->numberBetween(1, 7) . ' days');
 
         return [

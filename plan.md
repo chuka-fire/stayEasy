@@ -91,12 +91,12 @@ Internal hotel management tool for the staff of one hotel. Staff log in; manager
 - [x] **4.2 Keep old input and show errors** on the room forms. 💾 `FEATURE :sparkles: Don't lose old form content on room forms`
 - [x] **4.3 Validate guest input** with old input and errors. 💾 `FEATURE :sparkles: Validate guest form contents`
 - [x] **4.4 Success messages** — MessageBlock component shows a flashed message after saving or deleting. 💾 `FEATURE :sparkles: Implement success messages`
-- [ ] **4.5 Protect staff routes** — everything except welcome and login sits in an `auth` group. 💾 `FEATURE :sparkles: Protect all staff routes with auth`
-- [ ] **4.6 Remove public registration** — drop the register route and its link. 💾 `CLEANUP :broom: Remove public registration`
-- [ ] **4.7 Dashboard through a controller** — replace the starter kit's dashboard route with DashboardController (simple page for now); login still lands here. 💾 `REFACTOR :hammer: Move dashboard route to a controller`
-- [ ] **4.8 Remove unused starter-kit pages** — settings pages and their routes and tests; `php artisan test` must still pass. 💾 `CLEANUP :broom: Remove unused starter kit pages`
-- [ ] **4.9 Auth info in the header** — logged-in user's name and a logout button. 💾 `DESIGN :art: Add auth info to the header`
-- [ ] **4.10 🧑 Test auth** — log in as admin, log out, open `/rooms` while logged out, open `/register`, submit an invalid room form.
+- [x] **4.5 Protect staff routes** — everything except welcome and login sits in an `auth` group. 💾 `FEATURE :sparkles: Protect all staff routes with auth`
+- [x] **4.6 Remove public registration** — drop the register route and its link. 💾 `CLEANUP :broom: Remove public registration`
+- [x] **4.7 Dashboard through a controller** — replace the starter kit's dashboard route with DashboardController (simple page for now); login still lands here. 💾 `REFACTOR :hammer: Move dashboard route to a controller`
+- [x] **4.8 Remove unused starter-kit pages** — settings pages and their routes and tests; `php artisan test` must still pass. 💾 `CLEANUP :broom: Remove unused starter kit pages`
+- [x] **4.9 Auth info in the header** — logged-in user's name and a logout button. 💾 `DESIGN :art: Add auth info to the header`
+- [x] **4.10 🧑 Test auth** — log in as admin, log out, open `/rooms` while logged out, open `/register`, submit an invalid room form.
   ✅ VERIFY: redirected to login, `/register` gives 404, errors show and input is kept.
 - [ ] **4.11 🎓 DEFENSE** — explain authentication vs authorisation, and what the `auth` middleware does.
 

@@ -1,4 +1,11 @@
 <x-site-layout title="Bookings">
+    <div class="mb-4">
+        <a href="{{ route('bookings.create') }}"
+           class="inline-block bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700">
+            New booking
+        </a>
+    </div>
+
     <div class="bg-white rounded shadow overflow-hidden">
         <table class="w-full text-left">
             <thead class="bg-gray-50 text-sm text-gray-600">
