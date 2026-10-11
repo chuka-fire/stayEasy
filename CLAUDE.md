@@ -1,47 +1,21 @@
-<laravel-boost-guidelines>
-# Laravel Application
+# StayEasy — CLAUDE.md
 
-This repository contains a Laravel application. Complete the following setup before working on the user's request.
+## What this is
+Internal hotel management tool for one hotel. University course project (Software Development Basics). Full spec in `StayEasy_App_Proposal.docx`, build sequence in `plan.md`.
 
-## Prerequisites
+## How to work
+- Follow `plan.md` top-to-bottom, one unchecked step at a time.
+- Before building: explain what, why, and which files. Build only that step, then stop.
+- Never commit. I review diffs and commit myself.
+- MANUAL steps are mine. Run the VERIFY check after and report.
+- DEFENSE steps: I explain; correct me if wrong.
+- Don't re-read plan.md or the proposal each prompt — reference steps by number.
 
-Verify that PHP and Composer are available:
-
-```sh
-php -v
-composer -V
-```
-
-If either command is unavailable, detect the user's operating system and install the prerequisites with the appropriate command:
-
-macOS:
-
-```sh
-/bin/bash -c "$(curl -fsSL https://php.new/install/mac/8.5)"
-```
-
-Windows PowerShell:
-
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.5'))
-```
-
-Linux:
-
-```sh
-/bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.5)"
-```
-
-After installation, ask the user to restart their terminal. If the agent needs the restarted shell to continue, ask the user to reopen their terminal and rerun their original prompt.
-
-## Agent Setup
-
-Install Laravel Boost from the application root before making application changes:
-
-```sh
-composer require laravel/boost --dev
-php artisan boost:install
-```
-
-Boost replaces these bootstrap instructions with guidelines tailored to the application. After installation, read `AGENTS.md` again and continue with the user's original request using the generated guidelines.
-</laravel-boost-guidelines>
+## Conventions (match the course)
+- Explicit named routes, one per line, no Route::resource.
+- Controllers: $id + find(), inline validation, compact(), redirect to named route after writes.
+- Models: $guarded = [], relations with return types + explicit FK, both directions.
+- Naming: singular capitalized models, lowercase props, modelname_id keys.
+- Views: one folder per model, <x-site-layout>, old input + errors, Tailwind via CDN.
+- Commits: `TYPE :emoji: Message` — FEATURE :sparkles:, BUGFIX :bug:, REFACTOR :hammer:, DESIGN :art:, CLEANUP :broom:, CONTENT :pencil:.
+- Laravel 12 syntax. Livewire starter kit for auth.
