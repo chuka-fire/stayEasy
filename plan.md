@@ -36,20 +36,20 @@ Internal hotel management tool for the staff of one hotel. Staff log in; manager
 
 ## Phase 0 — Getting ready
 
-- [ ] **0.1 🧑 Create the project in Herd** — new Laravel project `stayeasy` with the Livewire starter kit, Laravel's built-in auth, Pest, and SQLite.
+- [x] **0.1 🧑 Create the project in Herd** — new Laravel project `stayeasy` with the Livewire starter kit, Laravel's built-in auth, Pest, and SQLite.
   ✅ VERIFY: Livewire kit installed, `DB_CONNECTION=sqlite`, Laravel version reported (course uses 12).
-- [ ] **0.2 🧑 Open `stayeasy.test`** — the default welcome page loads, with login and register links.
-- [ ] **0.3 🧑 Start Git and connect a public GitHub repo** (GitHub Desktop).
+- [x] **0.2 🧑 Open `stayeasy.test`** — the default welcome page loads, with login and register links.
+- [x] **0.3 🧑 Start Git and connect a public GitHub repo** (GitHub Desktop).
   ✅ VERIFY: working tree clean, remote points to GitHub. 💾 `Initial commit`
-- [ ] **0.4 Add this plan to the repo** — so the build history starts from the plan. 💾 `CONTENT :pencil: Add build plan`
+- [x] **0.4 Add this plan to the repo** — so the build history starts from the plan. 💾 `CONTENT :pencil: Add build plan`
 
 ## Phase 1 — Data: models, migrations, factories, seeding
 
-- [ ] **1.1 Add role flags to users** — `is_staff` and `is_manager` booleans (default false) in the existing users migration, cast as booleans on User. 💾 `FEATURE :sparkles: Add is_staff and is_manager flags to users`
-- [ ] **1.2 Update the User factory** — fake users are staff by default and not managers. 💾 `FEATURE :sparkles: Make factory users staff by default`
-- [ ] **1.3 Room model** — model, migration, and factory: `number`, `type` (single/double/suite), `price_per_night`. 💾 `FEATURE :sparkles: Add the Room model`
-- [ ] **1.4 Guest model** — model, migration, and factory: `name`, `email`, `phone`. 💾 `FEATURE :sparkles: Add the Guest model`
-- [ ] **1.5 Booking model** — model, migration, and factory: `user_id`, `room_id`, `guest_id`, `check_in`, `check_out`, `total_price`, `status` (default `booked`). 💾 `FEATURE :sparkles: Add the Booking model`
+- [x] **1.1 Add role flags to users** — `is_staff` and `is_manager` booleans (default false) in the existing users migration, cast as booleans on User. 💾 `FEATURE :sparkles: Add is_staff and is_manager flags to users`
+- [x] **1.2 Update the User factory** — fake users are staff by default and not managers. 💾 `FEATURE :sparkles: Make factory users staff by default`
+- [x] **1.3 Room model** — model, migration, and factory: `number`, `type` (single/double/suite), `price_per_night`. 💾 `FEATURE :sparkles: Add the Room model`
+- [x] **1.4 Guest model** — model, migration, and factory: `name`, `email`, `phone`. 💾 `FEATURE :sparkles: Add the Guest model`
+- [x] **1.5 Booking model** — model, migration, and factory: `user_id`, `room_id`, `guest_id`, `check_in`, `check_out`, `total_price`, `status` (default `booked`). 💾 `FEATURE :sparkles: Add the Booking model`
 - [ ] **1.6 Relation: User ↔ Booking** — a booking belongs to the staff member who created it; a user has many bookings. 💾 `FEATURE :sparkles: Relate bookings to the staff member who created them`
 - [ ] **1.7 Relation: Room ↔ Booking** — a booking belongs to a room; a room has many bookings. 💾 `FEATURE :sparkles: Relate bookings to rooms`
 - [ ] **1.8 Relation: Guest ↔ Booking** — a booking belongs to a guest; a guest has many bookings. 💾 `FEATURE :sparkles: Relate bookings to guests`
