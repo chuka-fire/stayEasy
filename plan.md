@@ -50,11 +50,11 @@ Internal hotel management tool for the staff of one hotel. Staff log in; manager
 - [x] **1.3 Room model** — model, migration, and factory: `number`, `type` (single/double/suite), `price_per_night`. 💾 `FEATURE :sparkles: Add the Room model`
 - [x] **1.4 Guest model** — model, migration, and factory: `name`, `email`, `phone`. 💾 `FEATURE :sparkles: Add the Guest model`
 - [x] **1.5 Booking model** — model, migration, and factory: `user_id`, `room_id`, `guest_id`, `check_in`, `check_out`, `total_price`, `status` (default `booked`). 💾 `FEATURE :sparkles: Add the Booking model`
-- [ ] **1.6 Relation: User ↔ Booking** — a booking belongs to the staff member who created it; a user has many bookings. 💾 `FEATURE :sparkles: Relate bookings to the staff member who created them`
-- [ ] **1.7 Relation: Room ↔ Booking** — a booking belongs to a room; a room has many bookings. 💾 `FEATURE :sparkles: Relate bookings to rooms`
-- [ ] **1.8 Relation: Guest ↔ Booking** — a booking belongs to a guest; a guest has many bookings. 💾 `FEATURE :sparkles: Relate bookings to guests`
-- [ ] **1.9 Seed the admin manager** — `admin@admin.com` / `password`, both flags true, created first in DatabaseSeeder. 💾 `FEATURE :sparkles: Seed admin manager`
-- [ ] **1.10 Seed test data** — staff users, rooms, guests, then bookings. Factory foreign-key ranges must match the seeded counts. 💾 `FEATURE :sparkles: Seed staff, rooms, guests and bookings`
+- [x] **1.6 Relation: User ↔ Booking** — a booking belongs to the staff member who created it; a user has many bookings. 💾 `FEATURE :sparkles: Relate bookings to the staff member who created them`
+- [x] **1.7 Relation: Room ↔ Booking** — a booking belongs to a room; a room has many bookings. 💾 `FEATURE :sparkles: Relate bookings to rooms`
+- [x] **1.8 Relation: Guest ↔ Booking** — a booking belongs to a guest; a guest has many bookings. 💾 `FEATURE :sparkles: Relate bookings to guests`
+- [x] **1.9 Seed the admin manager** — `admin@admin.com` / `password`, both flags true, created first in DatabaseSeeder. 💾 `FEATURE :sparkles: Seed admin manager`
+- [x] **1.10 Seed test data** — staff users, rooms, guests, then bookings. Factory foreign-key ranges must match the seeded counts. 💾 `FEATURE :sparkles: Seed staff, rooms, guests and bookings`
 - [ ] **1.11 🧑 Run `php artisan migrate:fresh --seed`** and inspect the tables in DB Browser.
   ✅ VERIFY: no errors, every table has rows, every booking points to an existing user, room and guest.
 - [ ] **1.12 🎓 DEFENSE** — explain the three one-to-many relations, which table holds each foreign key, and why.
