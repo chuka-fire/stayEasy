@@ -30,4 +30,9 @@ class Booking extends Model
     {
         return $this->belongsTo(Room::class, 'room_id');
     }
+
+    public function guest(): BelongsTo
+    {
+        return $this->belongsTo(Guest::class, 'guest_id');
+    }
 }
