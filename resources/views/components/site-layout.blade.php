@@ -11,10 +11,23 @@
         <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
             <a href="{{ route('welcome') }}" class="text-xl font-bold">StayEasy</a>
 
-            <nav class="flex gap-6 text-sm">
-                <a href="{{ route('rooms.index') }}" class="hover:underline">Rooms</a>
-                <a href="{{ route('guests.index') }}" class="hover:underline">Guests</a>
-                <a href="{{ route('bookings.index') }}" class="hover:underline">Bookings</a>
+            <nav class="flex items-center gap-6 text-sm">
+                @auth
+                    <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a>
+                    <a href="{{ route('rooms.index') }}" class="hover:underline">Rooms</a>
+                    <a href="{{ route('guests.index') }}" class="hover:underline">Guests</a>
+                    <a href="{{ route('bookings.index') }}" class="hover:underline">Bookings</a>
+
+                    <span class="text-gray-500">{{ auth()->user()->name }}</span>
+
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <button type="submit" class="hover:underline">Log out</button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}" class="hover:underline">Log in</a>
+                @endauth
             </nav>
         </div>
     </header>

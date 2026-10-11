@@ -55,42 +55,42 @@ Internal hotel management tool for the staff of one hotel. Staff log in; manager
 - [x] **1.8 Relation: Guest ↔ Booking** — a booking belongs to a guest; a guest has many bookings. 💾 `FEATURE :sparkles: Relate bookings to guests`
 - [x] **1.9 Seed the admin manager** — `admin@admin.com` / `password`, both flags true, created first in DatabaseSeeder. 💾 `FEATURE :sparkles: Seed admin manager`
 - [x] **1.10 Seed test data** — staff users, rooms, guests, then bookings. Factory foreign-key ranges must match the seeded counts. 💾 `FEATURE :sparkles: Seed staff, rooms, guests and bookings`
-- [ ] **1.11 🧑 Run `php artisan migrate:fresh --seed`** and inspect the tables in DB Browser.
+- [x] **1.11 🧑 Run `php artisan migrate:fresh --seed`** and inspect the tables in DB Browser.
   ✅ VERIFY: no errors, every table has rows, every booking points to an existing user, room and guest.
 - [ ] **1.12 🎓 DEFENSE** — explain the three one-to-many relations, which table holds each foreign key, and why.
 
 ## Phase 2 — Showing data: layout, index and show views
 
-- [ ] **2.1 Site layout component** — `SiteLayout` with header, main and footer, a title property, and Tailwind via CDN. 💾 `FEATURE :sparkles: Add the SiteLayout template`
-- [ ] **2.2 Welcome route through a controller** — replace the starter kit's view-only route with a WelcomeController. 💾 `REFACTOR :hammer: Move welcome route to a controller`
-- [ ] **2.3 StayEasy welcome page** — replace the default Laravel page with a short app intro and a login link. 💾 `DESIGN :art: Replace default welcome page with StayEasy landing`
-- [ ] **2.4 Rooms index** — list all rooms (`rooms.index`). 💾 `FEATURE :sparkles: Add the list of rooms (index)`
-- [ ] **2.5 Room show** — details of one room, linked from the index (`rooms.show`). 💾 `FEATURE :sparkles: Add the details of one room (show)`
-- [ ] **2.6 Guests index** — list all guests. 💾 `FEATURE :sparkles: Add the list of guests (index)`
-- [ ] **2.7 Guest show** — guest details plus their booking history. 💾 `FEATURE :sparkles: Show guest details with booking history`
-- [ ] **2.8 Bookings index** — list bookings with room number, guest name and dates. 💾 `FEATURE :sparkles: Add the list of bookings (index)`
-- [ ] **2.9 Booking show** — one booking with room, guest, staff member, price and status. 💾 `FEATURE :sparkles: Add the details of one booking (show)`
-- [ ] **2.10 Navigation** — header links to Rooms, Guests and Bookings. 💾 `DESIGN :art: Add navigation to the header`
-- [ ] **2.11 🧑 Click through every page** in the browser.
+- [x] **2.1 Site layout component** — `SiteLayout` with header, main and footer, a title property, and Tailwind via CDN. 💾 `FEATURE :sparkles: Add the SiteLayout template`
+- [x] **2.2 Welcome route through a controller** — replace the starter kit's view-only route with a WelcomeController. 💾 `REFACTOR :hammer: Move welcome route to a controller`
+- [x] **2.3 StayEasy welcome page** — replace the default Laravel page with a short app intro and a login link. 💾 `DESIGN :art: Replace default welcome page with StayEasy landing`
+- [x] **2.4 Rooms index** — list all rooms (`rooms.index`). 💾 `FEATURE :sparkles: Add the list of rooms (index)`
+- [x] **2.5 Room show** — details of one room, linked from the index (`rooms.show`). 💾 `FEATURE :sparkles: Add the details of one room (show)`
+- [x] **2.6 Guests index** — list all guests. 💾 `FEATURE :sparkles: Add the list of guests (index)`
+- [x] **2.7 Guest show** — guest details plus their booking history. 💾 `FEATURE :sparkles: Show guest details with booking history`
+- [x] **2.8 Bookings index** — list bookings with room number, guest name and dates. 💾 `FEATURE :sparkles: Add the list of bookings (index)`
+- [x] **2.9 Booking show** — one booking with room, guest, staff member, price and status. 💾 `FEATURE :sparkles: Add the details of one booking (show)`
+- [x] **2.10 Navigation** — header links to Rooms, Guests and Bookings. 💾 `DESIGN :art: Add navigation to the header`
+- [x] **2.11 🧑 Click through every page** in the browser.
   ✅ VERIFY: no errors, and relation data (names, room numbers) shows correctly.
 - [ ] **2.12 🎓 DEFENSE** — explain the request flow for `/rooms/3`: route → controller → model → view → response.
 
 ## Phase 3 — Input: CRUD
 
-- [ ] **3.1 Create a room** — form and store, then redirect to the new room. 💾 `FEATURE :sparkles: Add the create new room functionality`
-- [ ] **3.2 Edit a room** — edit form and update. 💾 `FEATURE :sparkles: Add the edit room functionality`
-- [ ] **3.3 Delete a room** — delete button on room show. Room now has all 7 resource actions. 💾 `FEATURE :sparkles: Add the delete room functionality`
-- [ ] **3.4 Add a guest** — form and store. 💾 `FEATURE :sparkles: Add the create new guest functionality`
-- [ ] **3.5 🧑 Create, edit and delete a room; add a guest** in the browser.
+- [x] **3.1 Create a room** — form and store, then redirect to the new room. 💾 `FEATURE :sparkles: Add the create new room functionality`
+- [x] **3.2 Edit a room** — edit form and update. 💾 `FEATURE :sparkles: Add the edit room functionality`
+- [x] **3.3 Delete a room** — delete button on room show. Room now has all 7 resource actions. 💾 `FEATURE :sparkles: Add the delete room functionality`
+- [x] **3.4 Add a guest** — form and store. 💾 `FEATURE :sparkles: Add the create new guest functionality`
+- [x] **3.5 🧑 Create, edit and delete a room; add a guest** in the browser.
   ✅ VERIFY: changes appear in the database, and every route maps to a controller function (`php artisan route:list`).
 - [ ] **3.6 🎓 DEFENSE** — name the 7 resource actions, their HTTP methods, and why PUT/DELETE forms need `@method`.
 
 ## Phase 4 — Trusting the user: validation and authentication
 
-- [ ] **4.1 Validate room input** — required fields, unique room number, allowed types, positive price. 💾 `FEATURE :sparkles: Validate room form contents`
-- [ ] **4.2 Keep old input and show errors** on the room forms. 💾 `FEATURE :sparkles: Don't lose old form content on room forms`
-- [ ] **4.3 Validate guest input** with old input and errors. 💾 `FEATURE :sparkles: Validate guest form contents`
-- [ ] **4.4 Success messages** — MessageBlock component shows a flashed message after saving or deleting. 💾 `FEATURE :sparkles: Implement success messages`
+- [x] **4.1 Validate room input** — required fields, unique room number, allowed types, positive price. 💾 `FEATURE :sparkles: Validate room form contents`
+- [x] **4.2 Keep old input and show errors** on the room forms. 💾 `FEATURE :sparkles: Don't lose old form content on room forms`
+- [x] **4.3 Validate guest input** with old input and errors. 💾 `FEATURE :sparkles: Validate guest form contents`
+- [x] **4.4 Success messages** — MessageBlock component shows a flashed message after saving or deleting. 💾 `FEATURE :sparkles: Implement success messages`
 - [ ] **4.5 Protect staff routes** — everything except welcome and login sits in an `auth` group. 💾 `FEATURE :sparkles: Protect all staff routes with auth`
 - [ ] **4.6 Remove public registration** — drop the register route and its link. 💾 `CLEANUP :broom: Remove public registration`
 - [ ] **4.7 Dashboard through a controller** — replace the starter kit's dashboard route with DashboardController (simple page for now); login still lands here. 💾 `REFACTOR :hammer: Move dashboard route to a controller`
