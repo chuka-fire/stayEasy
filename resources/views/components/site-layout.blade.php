@@ -9,7 +9,13 @@
 <body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
     <header class="bg-white shadow">
         <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="{{ url('/') }}" class="text-xl font-bold">StayEasy</a>
+            <a href="{{ route('welcome') }}" class="text-xl font-bold">StayEasy</a>
+
+            <nav class="flex gap-6 text-sm">
+                <a href="{{ route('rooms.index') }}" class="hover:underline">Rooms</a>
+                <a href="{{ route('guests.index') }}" class="hover:underline">Guests</a>
+                <a href="{{ route('bookings.index') }}" class="hover:underline">Bookings</a>
+            </nav>
         </div>
     </header>
 
